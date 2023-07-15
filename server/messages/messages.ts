@@ -473,6 +473,8 @@ export class Message {
                 else if (this.dest >= 144 && this.dest <= 158) this.protocol = Protocol.IntelliChem;
                 else if (this.source >= 144 && this.source <= 158) this.protocol = Protocol.IntelliChem;
                 else if (this.source == 12 || this.dest == 12) this.protocol = Protocol.IntelliValve;
+                else if (this.dest >= 160 && this.dest <= 180) this.protocol = Protocol.IntelliValve;
+                else if (this.source >= 160 && this.source <= 180) this.protocol = Protocol.IntelliValve;
                 if (this.datalen > 75) {
                     //this.isValid = false;
                     logger.debug(`Broadcast length ${this.datalen} exceeded 75 bytes for ${this.protocol} message. Message rewound ${this.header}`);

@@ -54,6 +54,15 @@ Number.prototype.round = function (dec) { return Number(Math.round(this + 'e' + 
 Number.prototype.format = function (format, empty) {
     if (isNaN(this)) return empty || '';
     if (typeof format === 'undefined') return this.toString();
+    if (format === "0x") return this.toString(16).padStart(4, '0');
+    if (format === "0xDate")
+    {
+        let dateStr = this.toString(16).padStart(6, '0');
+        let day = dateStr.substring(4, 6);
+        let month = dateStr.substring(2, 4);
+        let year =  dateStr.substring(0, 2);
+        return `${month.padStart(2, '0')}-${day.padStart(2, '0')}-${year.padStart(2, '0')}`;
+    }
     let isNegative = this < 0;
     let tok = ['#', '0'];
     let pfx = '', sfx = '', fmt = format.replace(/[^#\.0\,]/g, '');
