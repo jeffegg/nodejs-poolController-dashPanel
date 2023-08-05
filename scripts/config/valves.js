@@ -46,6 +46,13 @@
                         });
                         acc.find('div.picAccordian')[0].expanded(true);
                     });
+
+                $('<div id="btnAddValve"></div>').appendTo(btnPnl).actionButton({ text: 'Search Valves', icon: '<i class="fas fa-plus"></i>' })
+                    .on('click', function (e) {
+
+                        $.getApiService('/config/valve/search', null, `Finding Valves, please refresh...`, function (opts, status, xhr) {location.reload()});
+                    });
+
             });
         }
     });
@@ -84,6 +91,7 @@
                 items: o.circuits, inputAttrs: { style: { width: '9rem' } }, labelAttrs: { style: { marginLeft: '.25rem' } }
             });
             line = $('<div></div>').appendTo(pnl);
+            $('<div></div>').appendTo(line).valueSpinner({ labelText: 'Pin Id', binding: binding + 'pinId', min: 0, max: 100, step: 1, units: '', inputAttrs: { maxlength: 5 }, labelAttrs: { style: { marginLeft: '.25rem', width: '3rem'  } } });
             $('<div></div>').appendTo(line).valueSpinner({ labelText: 'Pin Id', binding: binding + 'pinId', min: 0, max: 100, step: 1, units: '', inputAttrs: { maxlength: 5 }, labelAttrs: { style: { marginLeft: '.25rem', width: '3rem'  } } });
             line = $('<div></div>').appendTo(pnl);
 
