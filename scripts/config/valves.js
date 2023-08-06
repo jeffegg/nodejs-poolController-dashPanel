@@ -47,10 +47,10 @@
                         acc.find('div.picAccordian')[0].expanded(true);
                     });
 
-                $('<div id="btnAddValve"></div>').appendTo(btnPnl).actionButton({ text: 'Search Valves', icon: '<i class="fas fa-plus"></i>' })
+                $('<div id="btnSearchValve"></div>').appendTo(btnPnl).actionButton({ text: 'Search Valves', icon: '<i class="fas fa-binoculars"></i>' })
                     .on('click', function (e) {
 
-                        $.getApiService('/config/valve/search', null, `Finding Valves, please refresh...`, function (opts, status, xhr) {location.reload()});
+                        $.putApiService('/config/valve/search', '{\"id\":-1}', `Finding Valves, please refresh...`, function (opts, status, xhr) {location.reload()});
                     });
 
             });
@@ -268,6 +268,12 @@
 
 
             var btnPnl = $('<div class="picBtnPanel btn-panel"></div>').appendTo(pnl);
+            var btnID = $('<div id="btnIDValve"></div>').appendTo(btnPnl).actionButton({ text: 'ID Valve', icon: '<i class="fas fa-binoculars"></i>' })
+            btnID.on('click', function (e) {
+                    let p = $(e.target).parents('div.picAccordian-contents:first');
+                    let v = dataBinder.fromElement(p);
+                    $.putApiService('/config/valve/search', v, `IDing Valve`, function (opts, status, xhr) {});
+                });
             var btnSave = $('<div id="btnSaveValve"></div>').appendTo(btnPnl).actionButton({ text: 'Save Valve', icon: '<i class="fas fa-save"></i>' });
             btnSave.on('click', function (e) {
                 var p = $(e.target).parents('div.picAccordian-contents:first');
